@@ -16,5 +16,6 @@ docker push username/imageName
 
 docker init
 docker compose up
+docker compose watch
 
 ```
