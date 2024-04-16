@@ -9,7 +9,7 @@ services:
     # we use depends_on to specify that service depends on another service
     # in this case, we specify that the web depends on the api service
     # this means that the api service will be started before the web service
-    depends_on: 
+    depends_on:
       - api
     # specify the build context for the web service
     # this is the directory where the Dockerfile for the web service is located
@@ -40,25 +40,25 @@ services:
           action: sync
 
   # define the api service/container
-  api: 
+  api:
     # api service depends on the db service so the db service will be started before the api service
-    depends_on: 
+    depends_on:
       - db
 
     # specify the build context for the api service
     build: ./backend
-    
+
     # specify the ports to expose for the api service
     # the first number is the port on the host machine
     # the second number is the port inside the container
-    ports: 
+    ports:
       - 8000:8000
 
     # specify environment variables for the api service
     # for demo purposes, we're using a local mongodb instance
-    environment: 
+    environment:
       DB_URL: mongodb://db/anime
-    
+
     # establish docker compose watch mode for the api service
     develop:
       # specify the files to watch for changes
@@ -68,7 +68,7 @@ services:
           action: rebuild
         - path: ./backend/package-lock.json
           action: rebuild
-        
+
         # it'll watch for changes in the backend directory and sync the changes with the container real time
         - path: ./backend
           target: /app
